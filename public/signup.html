@@ -1,62 +1,47 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
-<title>Shopify Signup</title>
+    <title>Shopify Signup</title>
 </head>
 
 <body>
 
-<h2>Create Shopify Customer</h2>
+    <h2>Create Shopify Customer</h2>
 
-<input id="name" placeholder="Full Name"><br><br>
-<input id="email" placeholder="Email"><br><br>
-<input id="phone" placeholder="Phone"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
+    <input id="name" placeholder="Full Name"><br><br>
+    <input id="email" placeholder="Email"><br><br>
+    <input id="phone" placeholder="Phone"><br><br>
+    <input id="password" type="password" placeholder="Password"><br><br>
 
-<button onclick="signup()">Signup</button>
+    <button onclick="signup()">Signup</button>
 
-<script>
+    <script>
+        async function signup() {
+            try {
 
-function signup(){
+                const response = await fetch("http://localhost:3000/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: document.getElementById("name").value,
+                        email: document.getElementById("email").value,
+                        phone: document.getElementById("phone").value,
+                        password: document.getElementById("password").value
+                    })
+                });
 
-fetch("/register",{
+                const data = await response.json();
+                console.log("data:", data);
 
-method:"POST",
-
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-name:document.getElementById("name").value,
-email:document.getElementById("email").value,
-phone:document.getElementById("phone").value,
-password:document.getElementById("password").value
-
-})
-
-})
-.then(res=>res.json())
-.then(data=>{
-
-if(data.success){
-
-alert("Customer Created in Shopify");
-
-}else{
-
-alert("Error creating customer");
-
-}
-
-});
-
-}
-
-</script>
+            } catch (error) {
+                console.error("Signup error:", error);
+            }
+        }
+    </script>
 
 </body>
+
 </html>

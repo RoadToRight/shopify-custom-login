@@ -4,7 +4,7 @@ import axios from "axios";
 import cors from "cors";
 import dotenv from "dotenv";
 
-dotenv.config({ path: "./config/.env" });
+// dotenv.config({ path: "./config/.env" });
 
 const app = express();
 
@@ -41,7 +41,7 @@ app.post("/register", async (req, res) => {
         }
       }
     );
-
+        console.log(response)
     res.json({
       success: true,
       customer: response.data.customer
@@ -93,8 +93,7 @@ app.post('/login', async (req, res) => {
 
     const data = await response.json();
 
-    // ⚡ Log full response for debugging
-    console.log('Shopify login response:', JSON.stringify(data, null, 2));
+
 
     if (!data.data || !data.data.customerAccessTokenCreate) {
       return res.status(500).json({
@@ -120,6 +119,6 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on ${process.env.PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server is running on 3000`);
 });
