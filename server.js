@@ -25,7 +25,7 @@ app.post("/register", async (req, res) => {
   try {
 
     const { name, email, phone, password } = req.body;
-    console.log(req.body)
+    // console.log(req.body)
 
     const response = await axios.post(
       `https://${SHOP}/admin/api/2024-01/customers.json`,
@@ -46,7 +46,7 @@ app.post("/register", async (req, res) => {
         }
       }
     );
-        console.log(response)
+        // console.log(response)
     res.json({
       success: true,
       customer: response.data.customer
