@@ -14,7 +14,12 @@ app.use(express.static("public"));
 
 const SHOP = process.env.SHOP;
 const TOKEN = process.env.ACCESS_TOKEN;
-
+app.get("/",(req,res) => {
+  res.status(200).json({
+    success:true,
+    message:"Successfully Get"
+  })
+})
 app.post("/register", async (req, res) => {
 
   try {
